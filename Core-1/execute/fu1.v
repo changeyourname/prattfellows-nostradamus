@@ -69,8 +69,7 @@ module FU1 (
 	*/
 	output [`CHECKPOINTS+`EXECUTION_FLAGS+`SIZE_PHYSICAL_LOG+`SIZE_ACTIVELIST_LOG+`SIZE_DATA+
 		`SIZE_ISSUEQ_LOG+`SIZE_LSQ_LOG+`CHECKPOINTS_LOG+`SIZE_CTI_LOG+`SIZE_PC:0] outPacket_o,
-	output outValid_o, 
-	output error
+	output outValid_o
 );
 
 
@@ -147,8 +146,7 @@ Complex_ALU calu(
 	.immd_i(instImmd),
 	.opcode_i(instOpcode),
 	.result_o(result),
-	.flags_o(flags), 
-	.error(error)
+	.flags_o(flags)
 );
 
 endmodule

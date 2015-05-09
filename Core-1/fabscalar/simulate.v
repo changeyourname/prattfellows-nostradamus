@@ -74,7 +74,6 @@ integer rob_stall;
 integer iq_stall;
 integer ldq_stall;
 integer stq_stall;
-integer residue_error;
 
 real ipc;
 
@@ -146,7 +145,6 @@ begin:Processor_Initialization
  iq_stall		= 0;
  ldq_stall		= 0;
  stq_stall		= 0;
- residue_error	= 0;
 
  fd9 	= $fopen("results/fetch1_o.txt","w");
  fd14 	= $fopen("results/fetch2_o.txt","w");
@@ -575,17 +573,6 @@ begin: PRINT_FULL
 end // always @(posedge clock) for PRINT_FULL
 
 `endif // `ifdef PRINT_EVERYTHING
-
-
-always@(posedge clock)
-begin
-if (fabScalar.execute.error)
-begin
-	residue_error = residue_error +1;
-	//$display("ERROR DETECTED");
-end
-end 
-
 
 
 `ifdef PRINT
@@ -1645,14 +1632,13 @@ begin:COMMIT
 			load_violation_count,
 			br_count,
 			br_mispredict_count);*/
-        $display("Cycle Count:%d Commit Count:%d  BTB-Miss:%d BTB-Miss-Rtn:%d  Br-Count:%d Br-Mispredict:%d Residue-Error: %d",
+        $display("Cycle Count:%d Commit Count:%d  BTB-Miss:%d BTB-Miss-Rtn:%d  Br-Count:%d Br-Mispredict:%d",
                         sim_count,
                         fabScalar.activeList.commitCount,
                         btb_miss,
                         btb_miss_rtn,
                         br_count,
-                        br_mispredict_count,
-						residue_error);
+                        br_mispredict_count);
 
 
 	last_commit_cnt = fabScalar.activeList.commitCount;

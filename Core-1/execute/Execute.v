@@ -184,8 +184,8 @@ module Execute(
 	output exePacketValid2_o,
 	output [`CHECKPOINTS+`LDST_TYPES_LOG+`EXECUTION_FLAGS+`SIZE_PHYSICAL_LOG+`SIZE_ACTIVELIST_LOG+
 		`SIZE_DATA+`SIZE_ISSUEQ_LOG+`SIZE_LSQ_LOG+`CHECKPOINTS_LOG+`SIZE_CTI_LOG+`SIZE_PC:0] exePacket3_o,
-	output exePacketValid3_o,
-										output error
+	output exePacketValid3_o
+										//output error
 );
 
 /* Defining wire and regs for combinational logic. */
@@ -224,7 +224,7 @@ wire [`SIZE_DATA-1:0] fu2FinalData2;
 wire [`SIZE_DATA-1:0] fu3FinalData1;
 wire [`SIZE_DATA-1:0] fu3FinalData2;
 
-wire error0, error1;
+wire error0;
 
 /* Following instantiates FU0: simple ALU 
 */
@@ -241,8 +241,8 @@ wire error0, error1;
           .ctrlSMTid_i(ctrlSMTid_i),
 
           .outPacket_o(exePacket0_o),
-          .outValid_o(exePacketValid0_o),
-												.error(error0)
+          .outValid_o(exePacketValid0_o)
+												//.error(error0)
 	);
 
 /* Following instantiates FU1: complex ALU
@@ -260,8 +260,7 @@ wire error0, error1;
           .ctrlSMTid_i(ctrlSMTid_i),
 
           .outPacket_o(exePacket1_o),
-          .outValid_o(exePacketValid1_o), 
-												.error(error1)
+          .outValid_o(exePacketValid1_o)
 	);
 
 /* Following instantiates FU2: control unit 
@@ -522,5 +521,5 @@ end
                           );
 						  
 //assign error = error0 | error1 | error2 | error3;
-assign error = error0 | error1;
+//assign error = error0;
 endmodule

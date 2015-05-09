@@ -21,8 +21,8 @@ module FABSCALAR(  input clock,
                    input [`SIZE_PC-1:0] wrAddrL1ICache_i,
                    input [`CACHE_WIDTH-1:0]   wrBlockL1ICache_i,
                    output missL1ICache_o,
-                   output [`SIZE_PC-1:0] missAddrL1ICache_o,
-										output error
+                   output [`SIZE_PC-1:0] missAddrL1ICache_o
+										//output error
 		);
 		
 //wire error;
@@ -1207,8 +1207,8 @@ assign newDestMap3 = renamedPacket3[3*`SIZE_PHYSICAL_LOG+3+`SIZE_IMMEDIATE+1+
                    .exePacket2_o(exePacket2),
                    .exePacketValid2_o(exePacketValid2),
                    .exePacket3_o(exePacket3),
-                   .exePacketValid3_o(exePacketValid3),
-												.error(error_execute)
+                   .exePacketValid3_o(exePacketValid3)
+												//.error(error_execute)
                  );
 
 
@@ -1474,6 +1474,6 @@ assign newDestMap3 = renamedPacket3[3*`SIZE_PHYSICAL_LOG+3+`SIZE_IMMEDIATE+1+
                  );
                       
 //assign error = error_execute | error_commit | error_parity; 
-assign error = error_execute;                  
+//assign error = error_execute;                  
 
 endmodule
